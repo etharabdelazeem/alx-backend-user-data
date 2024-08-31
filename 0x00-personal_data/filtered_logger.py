@@ -82,3 +82,26 @@ def get_db() -> MySQLConnection:
     )
 
     return connection
+
+
+def main():
+    """Main function to retrieve and display data from the database"""
+    db = get_db()
+    cursor = db.cursor()
+
+    cursor.execute("SELECT * FROM users;")
+    rows = cursor.fetchall()
+
+    logger = get_logger()
+
+    for row in rows:
+        row_dict = dict(zip([column[0] for column in cursor.description], row))
+        message = "; ".join([f"{k}={v}" for k, v in row_dict.items()]) + ";"
+        logger.info(message)
+
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
