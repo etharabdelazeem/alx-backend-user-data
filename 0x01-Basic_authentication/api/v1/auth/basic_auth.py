@@ -2,6 +2,7 @@
 """
 Basic Authentication class definition
 """
+import base64
 from .auth import Auth
 
 
