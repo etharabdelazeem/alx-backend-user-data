@@ -20,15 +20,18 @@ class Auth:
             for excluded_path in excluded_paths:
                 if path == excluded_path[:-1]:
                     return False
-            return True
-        else:
-            return True
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
         Returns the authorization header from a request object
         """
-        return None
+        if request is None:
+            return None
+        header = request.headers.get('Authorization')
+        if header is None:
+            return None
+        return header
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
