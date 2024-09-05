@@ -12,6 +12,7 @@ class SessionAuth(Auth):
     session authentication mechanism class
     """
     user_id_by_session_id = {}
+
     def create_session(self, user_id: str = None) -> str:
         """
         creates a session id for user
